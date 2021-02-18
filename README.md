@@ -37,3 +37,9 @@ event_dispatcher是对事件分发机制的抽象。
 
 channel_map
 channel_map保存了描述字到channel的映射，这样就可以在事件发生时，根据事件类型对应的套接字快速找到channel对象里的事件处理函数。
+
+3.2 I/O模型和多线程模型设计
+I/O线程和多线程模型，主要解决event_loop的线程运行问题，以及事件分发和回调的线程执行问题。
+
+thread_pool
+thread_pool维护了一个sub-reator的线程池，它对主reactor负责，每当有新的连接建立时，主readtor从thread_pool中获取一个线程，以便用它来完成对新连接套接字的read/write事件注册，将I/O线程和主reator线程分离.
