@@ -25,3 +25,15 @@ TCP高性能网络框架需要满足的需求有如下三点。
 3.1 反应堆模式设计
 反应堆模式，主要是设计一个基于事件分发和回调的反应堆框架。这个框架中的主要对象包括：event_loop
 event_loop和一个线程绑定，它是一个无限循环着的事件分发器，一旦有事件发生，它就会执行回调函数，完成事件的处理。具体来说，event_loop使用epoll方法将一个线程阻塞，直到某个I/O事件发生。
+
+channel
+我们将各种注册到event_loop上的对象抽象为channel来表示，例如注册到event_loop上的监听事件，注册到event_loop上的套接字读写事件等
+
+acceptor
+acceptor对象是服务器端监听器，acceptor对象最终会最为一个channel对象，注册到event_loop上，以便进行连接完成事件分发和检测。
+
+event_dispatcher
+event_dispatcher是对事件分发机制的抽象。
+
+channel_map
+channel_map保存了描述字到channel的映射，这样就可以在事件发生时，根据事件类型对应的套接字快速找到channel对象里的事件处理函数。
