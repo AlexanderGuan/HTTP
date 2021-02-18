@@ -43,3 +43,14 @@ I/O线程和多线程模型，主要解决event_loop的线程运行问题，以�
 
 thread_pool
 thread_pool维护了一个sub-reator的线程池，它对主reactor负责，每当有新的连接建立时，主readtor从thread_pool中获取一个线程，以便用它来完成对新连接套接字的read/write事件注册，将I/O线程和主reator线程分离.
+
+event_loop_thread
+event_loop_thread是reactor的线程实现，连接套接字的read/write事件检测便是在这个线程中完成的。
+
+3.3 Buffer和数据读写
+buffer
+如果没有buffer对象，连接套接字的read/write事件都需要和字节流直接打交道。那么我们提供一个buffer对象，其屏蔽了对套接字进行读写的操作，用来表示从连接套接字收取的数据，以及应用程序即将需要发出的数据。
+
+tcp_connection
+tcp_connection对象描述已经建立的TCP连接。它的属性包括接收缓冲区、发送缓冲区、channel对象等。这些是TCP连接的天然属性。
+tcp_connection是上层应用程序和高性能框架直接打交道的数据结构
