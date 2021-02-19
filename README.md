@@ -61,5 +61,8 @@ tcp_connection对象描述已经建立的TCP连接。它的属性包括接收缓
 ![event_loop运行详图](https://github.com/AlexanderGuan/HTTP/blob/main/%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1.JPG)  
 当调用event_loop_run后，线程会进入循环，首先执行dispatch事件分发，然后阻塞在这里，一旦有事件发生，就会调用channel_event_activate函数，在这个函数中进行事件回调函数eventReadcallback和eventwritecallback的调用，最后在通过event_loop_handle_pending_channel修改当前监听的事件列表，完成这个部分后，又进入事件分发循环。  
 ## 4.2 多线程模式设计  
-![线程运行关系-文字版](https://github.com/AlexanderGuan/HTTP/blob/main/%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E5%85%B3%E7%B3%BB-%E6%96%87%E5%AD%97%E7%89%88.JPG)
+![线程运行关系-文字版](https://github.com/AlexanderGuan/HTTP/blob/main/%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E5%85%B3%E7%B3%BB-%E6%96%87%E5%AD%97%E7%89%88.JPG)  
+在本框架中，main reactor线程是一个acceptor线程，这个线程一旦创建，会以event_loop形式阻塞在event_dispatcher的dispatch方法上，它在监听套接字上的事件发生，也就是已完成的连接，一旦有连接完成，就会创建出连接对象tcp_connection及channel对象等。  
+当用户期望使用多个sub-reactor子线程时，主线程会创建多个子线程，每个子线程在创建之后会按照主线程指定的启动函数立即运行，并进行初始化。在多线程的情况下，需要将新创建的已连接套接字对应的读写事件交给一个sub-reactor线程处理，这时从线程池中取出一个线程，通知这个线程有新的事件加入。  
+子线程是一个阻塞在dispatch上的event_loop线程，当有事件发生时，它会查找channel_map,找对对应的处理函数并执行它，之后它会增加、删除或修改pending事件，并进入下一轮的dispatch。  
 
