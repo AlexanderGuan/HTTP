@@ -30,13 +30,13 @@ event_loop和一个线程绑定，它是一个无限循环着的事件分发器�
 - **channel**  
 我们将各种注册到event_loop上的对象抽象为channel来表示，例如注册到event_loop上的监听事件，注册到event_loop上的套接字读写事件等
 
-- acceptor  
+- **acceptor**  
 acceptor对象是服务器端监听器，acceptor对象最终会最为一个channel对象，注册到event_loop上，以便进行连接完成事件分发和检测。
 
-- event_dispatcher  
+- **event_dispatcher**  
 event_dispatcher是对事件分发机制的抽象。
 
-- channel_map  
+- **channel_map**  
 channel_map保存了描述字到channel的映射，这样就可以在事件发生时，根据事件类型对应的套接字快速找到channel对象里的事件处理函数。
 
 ## 3.2 I/O模型和多线程模型设计
