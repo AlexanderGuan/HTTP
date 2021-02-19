@@ -61,4 +61,5 @@ tcp_connection对象描述已经建立的TCP连接。它的属性包括接收缓
 ![event_loop运行详图](https://github.com/AlexanderGuan/HTTP/blob/main/%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1.JPG)  
 当调用event_loop_run后，线程会进入循环，首先执行dispatch事件分发，然后阻塞在这里，一旦有事件发生，就会调用channel_event_activate函数，在这个函数中进行事件回调函数eventReadcallback和eventwritecallback的调用，最后在通过event_loop_handle_pending_channel修改当前监听的事件列表，完成这个部分后，又进入事件分发循环。  
 ## 4.2 多线程模式设计  
+![线程运行关系-文字版](https://github.com/AlexanderGuan/HTTP/blob/main/%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E5%85%B3%E7%B3%BB-%E6%96%87%E5%AD%97%E7%89%88.JPG)
 
