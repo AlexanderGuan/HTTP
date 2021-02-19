@@ -57,5 +57,6 @@ event_loop_thread是reactor的线程实现，连接套接字的read/write事件�
 tcp_connection对象描述已经建立的TCP连接。它的属性包括接收缓冲区、发送缓冲区、channel对象等。这些是TCP连接的天然属性。tcp_connection是上层应用程序和高性能框架直接打交道的数据结构,在设计框架时不应该把最下层的channel对象直接暴露给应用程序，因为channel对象不仅仅可以表示tcp_connection，而且监听套接字也是一个channel对象，用来唤醒线程的sockpair也是一个channel对象，因此设计了tcp_connection作为一个比较清晰的编程入口。
 
 四、框架逻辑关系
+![event_loop运行详图](https://github.com/AlexanderGuan/HTTP/blob/main/%E5%8F%8D%E5%BA%94%E5%A0%86%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1.JPG)
 
 
