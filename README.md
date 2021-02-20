@@ -14,17 +14,25 @@
 最后，希望读者能够提出宝贵的意见，感谢您的关注！
 
 ## 二、服务器运行试验及运行环境
-- **机器环境**  
+### 2.1 运行环境  
 OS:Ubuntu 18.04, gcc:9.3.0, cmake: 3.16.3  
 
-- **编译**  
+### 2.2 编译  
 本项目使用cmake进行编译，以方便跨平台执行。  
 请先创建build目录，并在build目录下执行cmake命令
 >mkdir build && cd build  
 >cmake ../  
 >make  
 
-所有可执行文件都位于build/bin目录中
+所有可执行文件都位于build/bin目录中  
+
+### 2.3 测试  
+- **服务端**  
+![server](https://github.com/AlexanderGuan/HTTP/blob/main/server.png)  
+
+- **客户端**  
+![client](https://github.com/AlexanderGuan/HTTP/blob/main/client.png)  
+
 
 
 ## 三、需求分析
