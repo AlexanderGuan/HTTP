@@ -29,9 +29,11 @@ OS:Ubuntu 18.04, gcc:9.3.0, cmake: 3.16.3
 ### 2.3 测试  
 - **服务端**  
 ![server](https://github.com/AlexanderGuan/HTTP/blob/main/server.png)  
+如图所示，服务端先由主线程创建子线程，当全部子线程初始化之后进入阻塞态。当外部有连接请求时，主线程将子线程唤醒处理I/O事件。如有多个请求，则唤醒多个线程。
 
 - **客户端**  
 ![client](https://github.com/AlexanderGuan/HTTP/blob/main/client.png)  
+如图所示，客户端成功连接43211端口，并成功接收到了服务端的信息。理论上服务端支持C10K标准，即同时处理10000个连接。  
 
 
 
