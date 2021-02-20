@@ -19,7 +19,7 @@ OS:Ubuntu 18.04, gcc:9.3.0, cmake: 3.16.3
 
 - **编译**  
 本项目使用cmake进行编译，以方便跨平台执行。  
-请先创建build目录，并在build目录下执行cmake命令  
+请先创建build目录，并在build目录下执行cmake命令
 >mkdir build && cd build  
 >cmake ../  
 再执行  
