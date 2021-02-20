@@ -22,8 +22,8 @@ OS:Ubuntu 18.04, gcc:9.3.0, cmake: 3.16.3
 请先创建build目录，并在build目录下执行cmake命令
 >mkdir build && cd build  
 >cmake ../  
-再执行  
 >make  
+
 所有可执行文件都位于build/bin目录中
 
 
